@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MoviesService } from '../service/movies.service';
-import { Movies } from '../models/movies';
+import { Movie } from '../models/movie';
 
 @Component({
   selector: 'app-movies',
@@ -8,30 +8,43 @@ import { Movies } from '../models/movies';
   styleUrls: ['./movies.component.css']
 })
 export class MoviesComponent implements OnInit {
-  private popular: Movies;
-  private theaters: Movies;
-  private popularKids: Movies;
-  private bestDramas: Movies;
+  private popular: Array<Movie>;
+  private theaters: Array<Movie>;
+  private popularKids: Array<Movie>;
+  private bestDramas: Array<Movie>;
+  private searchingMovies: Array<Movie>;
+  isSearch: boolean
+
   constructor(private moviesServices: MoviesService) { }
 
-  ngOnInit() {
-    this.moviesServices.getPopular()
-      .subscribe(data => {
-        this.popular = data;
-        console.log(data.results);
-      });
-    this.moviesServices.getTheaters()
-      .subscribe(data => {
-        this.theaters = data;
-      });
-    this.moviesServices.getPopularKids()
-      .subscribe(data => {
-        this.popularKids = data;
-      });
-    this.moviesServices.getBestDramas()
-      .subscribe(data => {
-        this.bestDramas = data;
+  search(myQuery) {
+    this.moviesServices.findMovie(myQuery.search)
+      .subscribe(movies => {
+        this.searchingMovies = movies.results;
+        if (this.searchingMovies.length > 0) {
+          this.isSearch = true;
+        } else {
+          this.isSearch = false;
+        }
       });
   }
 
+  ngOnInit() {
+    this.moviesServices.getPopular()
+      .subscribe(movies => {
+        this.popular = movies.results;
+      });
+    this.moviesServices.getTheaters()
+      .subscribe(movies => {
+        this.theaters = movies.results;
+      });
+    this.moviesServices.getPopularKids()
+      .subscribe(movies => {
+        this.popularKids = movies.results;
+      });
+    this.moviesServices.getBestDramas()
+      .subscribe(movies => {
+        this.bestDramas = movies.results;
+      });
+  }
 }
