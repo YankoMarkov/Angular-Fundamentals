@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>Login Form</h1>
+  <div class="alert alert-danger" *ngIf="loginFailed">{{errMessage}}</div>
+  <form #loginForm="ngForm" (ngSubmit)="login()">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input [(ngModel)]="loginModel.username" name="username" #username="ngModel" type="text" class="form-control" id="username"
+        required>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input [(ngModel)]="loginModel.password" name="password" #password="ngModel" type="password" class="form-control" id="password"
+        required>
+    </div>
+    <button [disabled]="loginForm.invalid" type="submit" class="btn btn-success">Login</button>
+  </form>
+</div>
