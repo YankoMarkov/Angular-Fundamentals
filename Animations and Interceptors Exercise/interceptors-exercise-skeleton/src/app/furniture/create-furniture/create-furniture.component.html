@@ -1,0 +1,80 @@
+<div class="container">
+  <div class="row space-top">
+    <div class="col-md-12">
+      <h1>Create New Furniture</h1>
+      <p>Please fill all fields.</p>
+    </div>
+  </div>
+  <form #createForm="ngForm" (ngSubmit)="create()">
+    <div class="row space-top">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label class="form-control-label" for="new-make">Make</label>
+          <input class="form-control" id="new-make" type="text" minlength="4" [(ngModel)]="furnitureModel.make" name="make" #make="ngModel"
+            required>
+
+          <div [hidden]="make.valid || make.pristine" class="alert alert-dark">
+            Make must be at least 4 symbols long
+          </div>
+        </div>
+
+        <div class="form-group has-success">
+          <label class="form-control-label" for="new-model">Model</label>
+          <input class="form-control is-valid" id="new-model" type="text" minlength="4" [(ngModel)]="furnitureModel.model" name="model"
+            #model="ngModel" required>
+
+          <div [hidden]="model.valid || model.pristine" class="alert alert-dark">
+            Model must be at least 4 symbols long
+          </div>
+        </div>
+
+        <div class="form-group has-danger">
+          <label class="form-control-label" for="new-year">Year</label>
+          <input class="form-control is-invalid" id="new-year" type="number" [min]="1950" [max]="2050" [(ngModel)]="furnitureModel.year" name="year" #year="ngModel"
+            required>
+
+          <div [hidden]="year.valid || year.pristine" class="alert alert-dark">
+            Year must be between 1950 and 2050
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="new-description">Description</label>
+          <input class="form-control" id="new-description" type="text" minlength="10" [(ngModel)]="furnitureModel.description" name="description" #description="ngModel"
+            required>
+
+          <div [hidden]="description.valid || description.pristine" class="alert alert-dark">
+            Description must be more than 10 symbols
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label class="form-control-label" for="new-price">Price</label>
+          <input class="form-control" id="new-price" type="number" [min]="0" [(ngModel)]="furnitureModel.price" name="price" #price="ngModel" required>
+
+          <div [hidden]="price.valid || price.pristine" class="alert alert-dark">
+            Price must be a positive number
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="new-image">Image</label>
+          <input class="form-control" id="new-image" type="text" [(ngModel)]="furnitureModel.image" name="image" #image="ngModel" required>
+
+          <div [hidden]="image.valid || image.pristine" class="alert alert-dark">
+            Image URL is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="new-material">Material (optional)</label>
+          <input class="form-control" id="new-material" type="text" [(ngModel)]="furnitureModel.material" name="material">
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Create" [disabled]="createForm.form.invalid" />
+      </div>
+    </div>
+  </form>
+</div>
