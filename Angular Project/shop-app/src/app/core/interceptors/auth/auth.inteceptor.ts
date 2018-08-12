@@ -39,16 +39,6 @@ export class AuthInterceptor implements HttpInterceptor {
           this.toastr.success(res.body.message, "Success");
           this.router.navigate(['/signin'])
         }
-
-        if (res instanceof HttpResponse && res.body.success && res.url.endsWith('category/create')) {
-          this.toastr.success(res.body.message, "Success");
-          this.router.navigate(['/category/all'])
-        }
-
-        if (res instanceof HttpResponse && res.body.success && res.url.endsWith('product/create')) {
-          this.toastr.success(res.body.message, "Success");
-          this.router.navigate(['/product/all'])
-        }
       }));
   }
 

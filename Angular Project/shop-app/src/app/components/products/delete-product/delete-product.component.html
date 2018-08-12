@@ -4,7 +4,7 @@
       <h1>producturniture Details</h1>
     </div>
   </div>
-  <div *ngIproduct="deleteModel | async as product" class="row space-top">
+  <div *ngIf="deleteModel | async as product" class="row space-top">
     <div class="col-md-4">
       <div class="card text-white bg-primary">
         <div class="card-body">

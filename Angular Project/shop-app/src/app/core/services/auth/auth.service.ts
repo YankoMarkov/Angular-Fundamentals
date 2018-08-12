@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { RegisterModel } from '../../models/auth/register.model';
 import { LoginModel } from '../../models/auth/login.model';
 
-const loginUrl = 'http://localhost:5000/auth/login';
+const loginUrl = 'http://localhost:5000/auth/signin';
 const registerUrl = 'http://localhost:5000/auth/signup';
 
 @Injectable()

@@ -6,11 +6,13 @@ import { FormsModule } from '@angular/forms';
 import { CategoryRoutingModule } from './category.router';
 import { ProductService } from '../../core/services/product/product.service';
 import { AuthService } from '../../core/services/auth/auth.service';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    NgxPaginationModule,
     CategoryRoutingModule
   ],
   declarations: [
