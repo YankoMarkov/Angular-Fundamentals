@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="row space-top">
+    <div class="col-md-12">
+      <h1>Create New Product</h1>
+      <p>Please fill all fields.</p>
+    </div>
+  </div>
+  <form #createForm="ngForm" (ngSubmit)="create()">
+    <div class="row space-top">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label class="form-control-label" for="new-name">Name</label>
+          <input class="form-control" id="new-name" type="text" minlength="4" [(ngModel)]="createModel.name" name="name" #name="ngModel"
+            required>
+
+          <div [hidden]="name.valid || name.pristine" class="alert alert-dark">
+            Name must be at least 4 symbols long
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="new-description">Description</label>
+          <input class="form-control" id="new-description" type="text" minlength="10" [(ngModel)]="createModel.description" name="description"
+            #description="ngModel" required>
+
+          <div [hidden]="description.valid || description.pristine" class="alert alert-dark">
+            Description must be more than 10 symbols
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label class="form-control-label" for="new-price">Price</label>
+          <input class="form-control" id="new-price" type="number" [min]="0" [(ngModel)]="createModel.price" name="price" #price="ngModel"
+            required>
+
+          <div [hidden]="price.valid || price.pristine" class="alert alert-dark">
+            Price must be a positive number
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="new-image">Image</label>
+          <input class="form-control" id="new-image" type="text" [(ngModel)]="createModel.image" name="image" #image="ngModel" required>
+
+          <div [hidden]="image.valid || image.pristine" class="alert alert-dark">
+            Image URL is required
+          </div>
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Create" [disabled]="createForm.form.invalid" />
+      </div>
+    </div>
+  </form>
+</div>
