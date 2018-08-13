@@ -29,17 +29,21 @@ export class CategoryInterceptor implements HttpInterceptor {
 
     return next.handle(request)
       .pipe(tap((res: any) => {
-        if (res instanceof HttpResponse && res.body.success && res.url.endsWith('category/create')) {
-          this.toastr.success(res.body.message, "Success");
-          this.router.navigate(['/category/all'])
+        let url = String(res.url)
+        let index = url.indexOf('category')
+        let newUrl = url.substring(index)
+
+        if (newUrl.indexOf('category/create') !== -1) {
+          if (res instanceof HttpResponse && res.body.success && res.url.endsWith(newUrl)) {
+            this.toastr.success(res.body.message, "Success");
+            this.router.navigate(['/category/all'])
+          }
         }
-        if (res instanceof HttpResponse && res.body.success && res.url.endsWith('category/deleteProduct/:id')) {
-          this.toastr.success(res.body.message, "Success");
-          this.router.navigate(['/product/all'])
-        }
-        if (res instanceof HttpResponse && res.body.success && res.url.endsWith('category/delete/:id')) {
-          this.toastr.success(res.body.message, "Success");
-          this.router.navigate(['/home'])
+        if (newUrl.indexOf('category/delete') !== -1) {
+          if (res instanceof HttpResponse && res.body.success && res.url.endsWith(newUrl)) {
+            this.toastr.success(res.body.message, "Success");
+            this.router.navigate(['/home'])
+          }
         }
       }));
   }

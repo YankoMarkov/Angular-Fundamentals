@@ -18,7 +18,7 @@ module.exports = {
     categoryData[id] = newcategory
   },
   all: () => {
-    return Object.keys(categoryData)
+    return Object.values(categoryData)
   },
   findById: (id) => {
     return categoryData[id]
@@ -30,8 +30,9 @@ module.exports = {
     delete categoryData[id]
   },
   deleteProduct(id, productId) {
-    for (let i = 0; i < categoryData[id].products.length; i++) {
-      if (categoryData[id].products[i] == productId) {
+    let products = categoryData[id].products
+    for (let i = 0; i < products.length; i++) {
+      if (products[i] == productId) {
         categoryData[id].products.splice(i, 1)
       }
     }

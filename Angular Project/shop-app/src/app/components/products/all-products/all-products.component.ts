@@ -15,8 +15,7 @@ export class AllProductsComponent implements OnInit {
   currentPage: number = 1;
 
   constructor(private productService: ProductService,
-    private authService: AuthService) {
-  }
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.productModel = this.productService.getAllProducts()

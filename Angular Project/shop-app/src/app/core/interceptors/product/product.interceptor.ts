@@ -29,25 +29,39 @@ export class ProductInterceptor implements HttpInterceptor {
 
     return next.handle(request)
       .pipe(tap((res: any) => {
-        if (res instanceof HttpResponse && res.body.success && res.url.endsWith('product/create')) {
-          this.toastr.success(res.body.message, "Success");
-          this.router.navigate(['/product/all'])
+        let url = String(res.url)
+        let index = url.indexOf('product')
+        let newUrl = url.substring(index)
+
+        if (newUrl.indexOf('product/create') !== -1) {
+          if (res instanceof HttpResponse && res.body.success && res.url.endsWith(newUrl)) {
+            this.toastr.success(res.body.message, "Success");
+            this.router.navigate(['/product/all'])
+          }
         }
-        if (res instanceof HttpResponse && res.body.success && res.url.endsWith('product/delete/:id')) {
-          this.toastr.success(res.body.message, "Success");
-          this.router.navigate(['/product/all'])
+        if (newUrl.indexOf('product/delete') !== -1) {
+          if (res instanceof HttpResponse && res.body.success && res.url.endsWith(newUrl)) {
+            this.toastr.success(res.body.message, "Success");
+            this.router.navigate(['/product/all'])
+          }
         }
-        if (res instanceof HttpResponse && res.body.success && res.url.endsWith('product/deleteProduct/:id')) {
-          this.toastr.success(res.body.message, "Success");
-          this.router.navigate(['/product/all'])
+        if (newUrl.indexOf('product/deleteProduct') !== -1) {
+          if (res instanceof HttpResponse && res.body.success && res.url.endsWith(newUrl)) {
+            this.toastr.success(res.body.message, "Success");
+            this.router.navigate(['/product/all'])
+          }
         }
-        if (res instanceof HttpResponse && res.body.success && res.url.endsWith('product/edit/:id')) {
-          this.toastr.success(res.body.message, "Success");
-          this.router.navigate(['/product/all'])
+        if (newUrl.indexOf('product/edit') !== -1) {
+          if (res instanceof HttpResponse && res.body.success && res.url.endsWith(newUrl)) {
+            this.toastr.success(res.body.message, "Success");
+            this.router.navigate(['/product/all'])
+          }
         }
-        if (res instanceof HttpResponse && res.body.success && res.url.endsWith('product/buy/:id')) {
-          this.toastr.success(res.body.message, "Success");
-          this.router.navigate(['/product/mine'])
+        if (newUrl.indexOf('product/buy') !== -1) {
+          if (res instanceof HttpResponse && res.body.success && res.url.endsWith(newUrl)) {
+            this.toastr.success(res.body.message, "Success");
+            this.router.navigate(['/product/mine'])
+          }
         }
       }));
   }

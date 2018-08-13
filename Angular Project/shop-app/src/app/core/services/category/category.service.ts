@@ -8,7 +8,6 @@ const createUrl = 'http://localhost:5000/category/create';
 const deleteUrl = 'http://localhost:5000/category/delete/';
 const allUrl = 'http://localhost:5000/category/all';
 const productsByCategoryUrl = 'http://localhost:5000/category/more/';
-const deleteProductUrl = 'http://localhost:5000/category/deleteProduct/';
 
 @Injectable()
 export class CategoryService {
@@ -29,9 +28,5 @@ export class CategoryService {
 
   allCategories() {
     return this.http.get<CategoryModel[]>(allUrl)
-  }
-
-  deleteProduct(id: number, productId: number) {
-    return this.http.delete(deleteProductUrl + id + "/" + productId)
   }
 }

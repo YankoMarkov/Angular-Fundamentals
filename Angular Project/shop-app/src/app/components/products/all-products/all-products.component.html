@@ -14,12 +14,14 @@
       <div class="card text-white bg-primary">
         <div class="card-body">
           <blockquote class="card-blockquote">
+            <p>{{product.name}}</p>
             <img src="{{product.image}}" />
             <p>{{product.description}}</p>
             <div class="pull-right">
-              <a routerLink="product/details/{{product.id}}" *ngIf="authService.isAuthenticated()" class="btn btn-info">Details</a>
-              <a routerLink="product/delete/{{product.id}}" *ngIf="authService.isAdmin()" class="btn btn-danger">Delete</a>
-              <a routerLink="product/edit/{{product.id}}" *ngIf="authService.isAdmin()" class="btn btn-success">Edit</a>
+              <a routerLink="/product/details/{{product.id}}" *ngIf="authService.isAuthenticated()" class="btn btn-info">Details</a>
+              <a routerLink="/category/more/{{product.category}}" *ngIf="authService.isAuthenticated()" class="btn btn-info">More By Category</a>
+              <a routerLink="/product/delete/{{product.id}}" *ngIf="authService.isAdmin()" class="btn btn-danger">Delete</a>
+              <a routerLink="/product/edit/{{product.id}}" *ngIf="authService.isAdmin()" class="btn btn-success">Edit</a>
             </div>
           </blockquote>
         </div>

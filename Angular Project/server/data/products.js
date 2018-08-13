@@ -14,10 +14,11 @@ module.exports = {
       price: product.price,
       image: product.image,
       createdOn: new Date(),
+      createdBy: product.createdBy,
       buyer: [],
       likes: [],
       reviews: [],
-      category: ''
+      category: product.category
     }
 
     productData[id] = newproduct
@@ -39,7 +40,7 @@ module.exports = {
         const productName = product.name.toLowerCase()
         const searchTerm = search.toLowerCase()
 
-        return productName.iOf(searchTerm) >= 0
+        return productName.indexOf(searchTerm) >= 0
       })
       .sort((a, b) => b.id - a.id)
       .slice(starti, endi)
@@ -58,15 +59,14 @@ module.exports = {
     productData[id].reviews.push(review)
   },
   allReviews: (id) => {
-    return productData[id]
-      .reviews
+    return productData[id].reviews
       .sort((a, b) => b.createdOn - a.createdOn)
       .slice(0)
   },
   like: (id, user) => {
     const likes = productData[id].likes
 
-    if (likes.iOf(user) >= 0) {
+    if (likes.indexOf(user) >= 0) {
       return false
     }
 
@@ -85,19 +85,21 @@ module.exports = {
       .keys(productData)
       .map(key => productData[key])
       .filter(product => product.buyer.includes(user))
-      .sort((a, b) => b.id - a.id)
   },
   delete: (id) => {
     delete productData[id]
   },
   deleteBuyer(id, user) {
-    for (let i = 0; i < productData[id].buyer.length; i++) {
-      if (productData[id].buyer[i] == user) {
+    let buyer = productData[id].buyer
+    for (let i = 0; i < buyer.length; i++) {
+      if (buyer[i] == user) {
         productData[id].buyer.splice(i, 1)
       }
     }
   },
   edit: (id, newItem) => {
+    newItem['id'] = id;
+    newItem['createdBy'] = productData[id]['createdBy'];
     productData[id] = newItem;
   }
 }

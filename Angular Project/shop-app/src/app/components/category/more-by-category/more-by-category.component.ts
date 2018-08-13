@@ -36,8 +36,6 @@ export class MoreByCategoryComponent implements OnInit {
   }
 
   deleteProduct(id: number) {
-    this.categoryService.deleteProduct(this.id, id)
-      .subscribe();
     this.productService.deleteProduct(id)
       .subscribe()
   }

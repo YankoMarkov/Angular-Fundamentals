@@ -17,9 +17,9 @@
             <img src="{{product.image}}" />
             <p>{{product.description}}</p>
             <div class="pull-right">
-              <a routerLink="product/details/{{product.id}}" class="btn btn-info">Details</a>
+              <a routerLink="/product/details/{{product.id}}" class="btn btn-info">Details</a>
               <a (click)="deleteProduct(product.id)" *ngIf="authService.isAdmin()" class="btn btn-danger">Delete</a>
-              <a routerLink="product/edit/{{product.id}}" *ngIf="authService.isAdmin()" class="btn btn-success">Edit</a>
+              <a routerLink="/product/edit/{{product.id}}" *ngIf="authService.isAdmin()" class="btn btn-success">Edit</a>
             </div>
           </blockquote>
         </div>

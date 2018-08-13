@@ -18,17 +18,17 @@ import { ProductInterceptor } from './product/product.interceptor';
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: ErrorInterceptor,
-      multi: true
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
       useClass: CategoryInterceptor,
       multi: true
     },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ProductInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
       multi: true
     }
   ]

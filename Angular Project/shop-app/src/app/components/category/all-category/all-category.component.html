@@ -12,7 +12,6 @@
           <blockquote class="card-blockquote">
             <p>{{category.name}}</p>
             <div class="pull-right">
-              <a routerLink="category/more/{{category.id}}" class="btn btn-info">More {{category.name}}</a>
               <a (click)="deleteCategory(category.id)" *ngIf="authService.isAdmin()" class="btn btn-danger">Delete</a>
             </div>
           </blockquote>

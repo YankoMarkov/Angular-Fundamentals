@@ -20,11 +20,11 @@ export class AllCategoryComponent implements OnInit {
     private toastr: ToastrService) { }
 
   ngOnInit() {
-    this.categoryModel = this.categoryService.allCategories()
+    this.categoryModel = this.categoryService.allCategories();
   }
 
   deleteCategory(id: number) {
     this.categoryService.deleteCategory(id)
-      .subscribe()
+      .subscribe();
   }
 }

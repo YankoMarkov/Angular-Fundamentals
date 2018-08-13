@@ -38,6 +38,16 @@ router.post('/create', authCheck, (req, res) => {
       errors: validationResult.errors
     })
   }
+  
+  let categories = categoryData.all()
+  for (let c of categories) {
+    if (c.name == category.name) {
+      return res.status(404).json({
+        success: false,
+        message: 'Category alredy exists!'
+      })
+    }
+  }
 
   categoryData.save(category)
 
@@ -58,6 +68,7 @@ router.get('/all', (req, res) => {
 router.get('/more/:id', (req, res) => {
   const id = req.params.id
   const products = []
+  let tempProducts = []
 
   const category = categoryData.findById(id)
 
@@ -67,13 +78,14 @@ router.get('/more/:id', (req, res) => {
       message: 'Category does not exists!'
     })
   }
-  if (category.products.length == 0) {
+  tempProducts = category.products
+  if (tempProducts.length == 0) {
     return res.status(404).json({
       success: false,
       message: 'Products does not exists!'
     })
   }
-  for (let id of category.products) {
+  for (let id of tempProducts) {
     let product = productData.findById(id)
     if (product) {
       products.push(product)
@@ -86,6 +98,7 @@ router.get('/more/:id', (req, res) => {
 router.delete('/delete/:id', authCheck, (req, res) => {
   const id = req.params.id
   const user = req.user.email
+  let tempProducts = []
 
   const category = categoryData.findById(id);
 
@@ -95,7 +108,8 @@ router.delete('/delete/:id', authCheck, (req, res) => {
       message: 'Category does not exists!'
     })
   }
-  if (category.prducts.length > 0) {
+  tempProducts = category.products
+  if (tempProducts.length > 0) {
     return res.status(404).json({
       success: false,
       message: 'Category products is not empty!'
@@ -103,34 +117,6 @@ router.delete('/delete/:id', authCheck, (req, res) => {
   }
 
   categoryData.delete(id)
-
-  return res.status(200).json({
-    success: true,
-    message: 'category deleted successfully!'
-  })
-})
-
-router.delete('/deleteProduct/:id/:productId', authCheck, (req, res) => {
-  const id = req.params.id
-  const productId = req.params.productId
-  const user = req.user.email
-
-  const category = categoryData.findById(id);
-
-  if (!category || (category.createdBy !== user && !req.user.roles.includes('Admin'))) {
-    return res.status(404).json({
-      success: false,
-      message: 'Category does not exists!'
-    })
-  }
-  if (category.prducts.length == 0) {
-    return res.status(404).json({
-      success: false,
-      message: 'Category products is empty!'
-    })
-  }
-
-  categoryData.deleteProduct(id, productId)
 
   return res.status(200).json({
     success: true,

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CreateProductModel } from '../../models/product/create-product.model';
 import { ProductModel } from '../../models/product/product.model';
-import { THROW_IF_NOT_FOUND } from '../../../../../node_modules/@angular/core/src/di/injector';
 
 const createUrl = 'http://localhost:5000/product/create';
 const allUrl = 'http://localhost:5000/product/all';

@@ -32,6 +32,11 @@ function validateProductForm(payload) {
     errors.image = 'Image URL is required.'
   }
 
+  if (!payload || typeof payload.category !== 'string' || payload.category.length === 0) {
+    isFormValid = false
+    errors.image = 'Category is required.'
+  }
+
   if (!isFormValid) {
     message = 'Check the form for errors.'
   }
@@ -57,7 +62,7 @@ router.post('/create', authCheck, (req, res) => {
   }
 
   productsData.save(product)
-
+  categoryData.addProduct(+product.category, product.id)
 
   res.status(200).json({
     success: true,
@@ -70,9 +75,9 @@ router.get('/all', (req, res) => {
   const page = parseInt(req.query.page) || 1
   const search = req.query.search
 
-  const product = productsData.all(page, search)
+  const products = productsData.all(page, search)
 
-  res.status(200).json(product)
+  res.status(200).json(products)
 })
 
 router.get('/details/:id', authCheck, (req, res) => {
@@ -87,21 +92,12 @@ router.get('/details/:id', authCheck, (req, res) => {
     })
   }
 
-  let response = {
-    id,
-    name: product.name,
-    description: product.description,
-    price: product.price,
-    image: product.image,
-    createdOn: product.createdOn
-  }
-
-  res.status(200).json(response)
+  res.status(200).json(product)
 })
-
 
 router.get('/mine', authCheck, (req, res) => {
   const user = req.user.email
+  console.log(req.user)
 
   const product = productsData.byUser(user)
 
@@ -121,8 +117,8 @@ router.delete('/delete/:id', authCheck, (req, res) => {
     })
   }
 
+  categoryData.deleteProduct(+product.category, id)
   productsData.delete(id)
-
 
   return res.status(200).json({
     success: true,
@@ -164,6 +160,7 @@ router.put('/edit/:id', authCheck, (req, res) => {
   }
 
   const validationResult = validateProductForm(product)
+
   if (!validationResult.success) {
     return res.status(400).json({
       success: false,
@@ -200,6 +197,7 @@ router.put('/buy/:id', authCheck, (req, res) => {
       errors: validationResult.errors
     })
   }
+
   if (product.buyer.includes(user)) {
     return res.status(404).json({
       success: false,
@@ -218,7 +216,7 @@ router.put('/buy/:id', authCheck, (req, res) => {
 router.get('/:id', authCheck, (req, res) => {
   const id = req.params.id
 
-  const product = productData.findById(id)
+  const product = productsData.findById(id)
 
   if (!product) {
     return res.status(200).json({
@@ -227,15 +225,7 @@ router.get('/:id', authCheck, (req, res) => {
     })
   }
 
-  let response = {
-    id,
-    name: product.name,
-    description: product.description,
-    price: product.price,
-    image: product.image
-  }
-
-  res.status(200).json(response)
+  res.status(200).json(product)
 })
 
 module.exports = router

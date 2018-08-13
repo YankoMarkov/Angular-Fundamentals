@@ -7,8 +7,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { CustomFormsModule } from 'ng2-validation';
 import { FormsModule } from '@angular/forms';
 import { ProductRoutingModule } from './product.routing';
-import { DetailsProductComponent } from './details-product/details-product.component';
-import { MyProductComponent } from './my-product/my-product.component';
+import { CategoryService } from '../../core/services/category/category.service';
 
 @NgModule({
   imports: [
@@ -23,6 +22,7 @@ import { MyProductComponent } from './my-product/my-product.component';
   ],
   providers: [
     ProductService,
+    CategoryService,
     AuthService
   ]
 })
