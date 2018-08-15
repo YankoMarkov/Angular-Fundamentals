@@ -2,10 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CreateProductModel } from '../../models/product/create-product.model';
 import { ProductModel } from '../../models/product/product.model';
+import { CreateReviewModel } from '../../models/review/create-review.model';
+import { ReviewModel } from '../../models/review/review.model';
 
 const createUrl = 'http://localhost:5000/product/create';
 const allUrl = 'http://localhost:5000/product/all';
 const detailsUrl = 'http://localhost:5000/product/details/';
+const likeUrl = 'http://localhost:5000/product/details/';
+const createReviewUrl = 'http://localhost:5000/product/details/';
+const reviewsUrl = 'http://localhost:5000/product/details/';
 const myUrl = 'http://localhost:5000/product/mine';
 const deleteUrl = 'http://localhost:5000/product/delete/';
 const deleteProductUrl = 'http://localhost:5000/product/deleteProduct/';
@@ -28,6 +33,18 @@ export class ProductService {
 
   getProductDetails(id: number) {
     return this.http.get<ProductModel>(detailsUrl + id);
+  }
+
+  like(id: number, body: object) {
+    return this.http.post(`${likeUrl}${id}/like`, body);
+  }
+
+  createReview(id: number, body: CreateReviewModel) {
+    return this.http.post(`${createReviewUrl}${id}/reviews/create`, body);
+  }
+
+  getReviews(id: number) {
+    return this.http.get<ReviewModel[]>(`${reviewsUrl}${id}/reviews`);
   }
 
   getMyProduct() {

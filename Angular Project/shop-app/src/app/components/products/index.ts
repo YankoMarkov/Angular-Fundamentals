@@ -4,6 +4,8 @@ import { DeleteProductComponent } from "./delete-product/delete-product.componen
 import { EditProductComponent } from "./edit-product/edit-product.component";
 import { DetailsProductComponent } from "./details-product/details-product.component";
 import { MyProductComponent } from "./my-product/my-product.component";
+import { DeleteMyProductComponent } from "./delete-my-product/delete-my-product.component";
+import { ProductReviewsComponent } from "./product-reviews/product-reviews.component";
 
 export const productComponents = [
   AllProductsComponent,
@@ -11,5 +13,7 @@ export const productComponents = [
   DeleteProductComponent,
   EditProductComponent,
   DetailsProductComponent,
-  MyProductComponent
+  MyProductComponent,
+  DeleteMyProductComponent,
+  ProductReviewsComponent
 ]

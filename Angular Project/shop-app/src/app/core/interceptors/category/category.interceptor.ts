@@ -33,13 +33,13 @@ export class CategoryInterceptor implements HttpInterceptor {
         let index = url.indexOf('category')
         let newUrl = url.substring(index)
 
-        if (newUrl.indexOf('category/create') !== -1) {
+        if (url.indexOf('category/create') !== -1) {
           if (res instanceof HttpResponse && res.body.success && res.url.endsWith(newUrl)) {
             this.toastr.success(res.body.message, "Success");
             this.router.navigate(['/category/all'])
           }
         }
-        if (newUrl.indexOf('category/delete') !== -1) {
+        if (url.indexOf('category/delete') !== -1) {
           if (res instanceof HttpResponse && res.body.success && res.url.endsWith(newUrl)) {
             this.toastr.success(res.body.message, "Success");
             this.router.navigate(['/home'])

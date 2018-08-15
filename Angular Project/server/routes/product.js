@@ -86,7 +86,7 @@ router.get('/details/:id', authCheck, (req, res) => {
   const product = productsData.findById(id)
 
   if (!product) {
-    return res.status(200).json({
+    return res.status(404).json({
       success: false,
       message: 'Entry does not exists!'
     })
@@ -97,7 +97,6 @@ router.get('/details/:id', authCheck, (req, res) => {
 
 router.get('/mine', authCheck, (req, res) => {
   const user = req.user.email
-  console.log(req.user)
 
   const product = productsData.byUser(user)
 
@@ -197,8 +196,8 @@ router.put('/buy/:id', authCheck, (req, res) => {
       errors: validationResult.errors
     })
   }
-
-  if (product.buyer.includes(user)) {
+  let buyer = product.buyer
+  if (buyer.includes(user)) {
     return res.status(404).json({
       success: false,
       message: 'The user already has this product!'
@@ -213,13 +212,99 @@ router.put('/buy/:id', authCheck, (req, res) => {
   })
 })
 
+router.post('/details/:id/like', authCheck, (req, res) => {
+  const id = req.params.id
+  const user = req.user.email
+
+  const product = productsData.findById(id)
+
+  if (!product) {
+    return res.status(404).json({
+      success: false,
+      message: 'Product does not exists!'
+    })
+  }
+
+  const result = productsData.like(id, user)
+
+  if (!result) {
+    return res.status(404).json({
+      success: false,
+      message: 'This user has already liked this product!'
+    })
+  }
+
+  res.status(200).json({
+    success: true,
+    message: 'Thank you for your like!'
+  })
+})
+
+router.post('/details/:id/reviews/create', authCheck, (req, res) => {
+  const id = req.params.id
+  const user = req.user.name
+
+  const product = productsData.findById(id)
+
+  if (!product) {
+    return res.status(404).json({
+      success: false,
+      message: 'Product does not exists!'
+    })
+  }
+
+  let rating = req.body.rating
+  const comment = req.body.comment
+
+  if (rating) {
+    rating = parseInt(rating)
+  }
+
+  if (!rating || rating < 1 || rating > 5) {
+    return res.status(404).json({
+      success: false,
+      message: 'Rating must be between 1 and 5.'
+    })
+  }
+
+  productsData.addReview(id, rating, comment, user)
+
+  res.status(200).json({
+    success: true,
+    message: 'Review added successfuly.',
+    review: {
+      id,
+      rating,
+      comment,
+      user
+    }
+  })
+})
+
+router.get('/details/:id/reviews', authCheck, (req, res) => {
+  const id = req.params.id
+
+  const product = productsData.findById(id)
+
+  if (!product) {
+    return res.status(404).json({
+      success: false,
+      message: 'Product does not exists!'
+    })
+  }
+
+  const response = productsData.allReviews(id)
+
+  res.status(200).json(response)
+})
+
 router.get('/:id', authCheck, (req, res) => {
   const id = req.params.id
 
   const product = productsData.findById(id)
 
   if (!product) {
-    return res.status(200).json({
+    return res.status(404).json({
       success: false,
       message: 'Entry does not exists!'
     })

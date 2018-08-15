@@ -8,6 +8,8 @@ import { CustomFormsModule } from 'ng2-validation';
 import { FormsModule } from '@angular/forms';
 import { ProductRoutingModule } from './product.routing';
 import { CategoryService } from '../../core/services/category/category.service';
+import { DeleteMyProductComponent } from './delete-my-product/delete-my-product.component';
+import { ProductReviewsComponent } from './product-reviews/product-reviews.component';
 
 @NgModule({
   imports: [

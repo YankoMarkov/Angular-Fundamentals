@@ -1,0 +1,6 @@
+<div *ngFor="let review of rewiewModel | async">
+  <p>Comment: {{review.comment}}</p>
+  <p>Rating: {{review.rating}}</p>
+  <p>Date: {{review.createdOn}}</p>
+  <p>From: {{review.user}}</p>
+</div>

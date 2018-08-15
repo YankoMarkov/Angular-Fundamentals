@@ -6,15 +6,16 @@
     </div>
   </div>
   <div class="row space-top">
-    <div *ngFor="let product of productModels | async" class="col-md-4">
+    <div *ngFor="let product of productModel | async" class="col-md-4">
       <div class="card text-white bg-primary">
         <div class="card-body">
           <blockquote class="card-blockquote">
             <img src="{{product.image}}" />
-            <p>{{product.description}}</p>
+            <p>Name: {{product.name}}</p>
+            <p>Description: {{product.description}}</p>
+            <p>Price: {{product.price}}</p>
             <div class="pull-right">
-              <a routerLink="product/details/{{product.id}}" *ngIf="authService.isAuthenticated()" class="btn btn-info">Details</a>
-              <a (click)="deleteProduct(product.id)" *ngIf="authService.isAuthenticated()" class="btn btn-danger">Delete</a>
+              <a routerLink="/product/deleteProduct/{{product.id}}" *ngIf="authService.isAuthenticated()" class="btn btn-danger">Delete</a>
             </div>
           </blockquote>
         </div>

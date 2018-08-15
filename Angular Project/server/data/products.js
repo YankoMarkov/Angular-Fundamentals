@@ -87,7 +87,7 @@ module.exports = {
       .filter(product => product.buyer.includes(user))
   },
   delete: (id) => {
-    delete productData[id]
+    delete productData[+id]
   },
   deleteBuyer(id, user) {
     let buyer = productData[id].buyer

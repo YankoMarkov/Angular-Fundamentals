@@ -33,34 +33,40 @@ export class ProductInterceptor implements HttpInterceptor {
         let index = url.indexOf('product')
         let newUrl = url.substring(index)
 
-        if (newUrl.indexOf('product/create') !== -1) {
+        if (url.indexOf('product/create') !== -1) {
           if (res instanceof HttpResponse && res.body.success && res.url.endsWith(newUrl)) {
             this.toastr.success(res.body.message, "Success");
             this.router.navigate(['/product/all'])
           }
         }
-        if (newUrl.indexOf('product/delete') !== -1) {
+        if (url.indexOf('product/delete') !== -1) {
           if (res instanceof HttpResponse && res.body.success && res.url.endsWith(newUrl)) {
             this.toastr.success(res.body.message, "Success");
             this.router.navigate(['/product/all'])
           }
         }
-        if (newUrl.indexOf('product/deleteProduct') !== -1) {
-          if (res instanceof HttpResponse && res.body.success && res.url.endsWith(newUrl)) {
-            this.toastr.success(res.body.message, "Success");
-            this.router.navigate(['/product/all'])
-          }
-        }
-        if (newUrl.indexOf('product/edit') !== -1) {
-          if (res instanceof HttpResponse && res.body.success && res.url.endsWith(newUrl)) {
-            this.toastr.success(res.body.message, "Success");
-            this.router.navigate(['/product/all'])
-          }
-        }
-        if (newUrl.indexOf('product/buy') !== -1) {
+        if (url.indexOf('product/deleteProduct') !== -1) {
           if (res instanceof HttpResponse && res.body.success && res.url.endsWith(newUrl)) {
             this.toastr.success(res.body.message, "Success");
             this.router.navigate(['/product/mine'])
+          }
+        }
+        if (url.indexOf('product/edit') !== -1) {
+          if (res instanceof HttpResponse && res.body.success && res.url.endsWith(newUrl)) {
+            this.toastr.success(res.body.message, "Success");
+            this.router.navigate(['/product/all'])
+          }
+        }
+        if (url.indexOf('product/buy') !== -1) {
+          if (res instanceof HttpResponse && res.body.success && res.url.endsWith(newUrl)) {
+            this.toastr.success(res.body.message, "Success");
+            this.router.navigate(['/product/mine'])
+          }
+        }
+        if (url.indexOf('product/details') !== -1) {
+          if (res instanceof HttpResponse && res.body.success && res.url.endsWith(newUrl)) {
+            this.toastr.success(res.body.message, "Success");
+            this.router.navigate(['/product/details'])
           }
         }
       }));

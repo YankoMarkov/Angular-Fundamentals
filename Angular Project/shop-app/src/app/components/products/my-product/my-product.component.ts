@@ -18,9 +18,4 @@ export class MyProductComponent implements OnInit {
   ngOnInit() {
     this.productModel = this.productService.getMyProduct();
   }
-
-  deleteProduct(id: number) {
-    this.productService.deleteProductByUser(id)
-      .subscribe();
-  }
 }

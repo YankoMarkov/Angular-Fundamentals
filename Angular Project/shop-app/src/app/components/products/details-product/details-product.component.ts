@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { ProductModel } from '../../../core/models/product/product.model';
 import { ProductService } from '../../../core/services/product/product.service';
 import { ActivatedRoute } from '@angular/router';
+import { CreateReviewModel } from '../../../core/models/review/create-review.model';
 
 @Component({
   selector: 'app-details-product',
@@ -11,12 +12,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetailsProductComponent implements OnInit {
   detailsModel: Observable<ProductModel>;
-  product: ProductModel
+  reviewModel: CreateReviewModel;
   id: number;
 
   constructor(private productService: ProductService,
     private route: ActivatedRoute) {
     this.id = this.route.snapshot.params['id'];
+    this.reviewModel = new CreateReviewModel(1, "");
   }
 
   ngOnInit() {
@@ -26,5 +28,15 @@ export class DetailsProductComponent implements OnInit {
   buyProduct(data) {
     this.productService.buyProduct(data.id, data)
       .subscribe()
+  }
+
+  addReview() {
+    this.productService.createReview(this.id, this.reviewModel)
+      .subscribe();
+  }
+
+  like(id: number) {
+    this.productService.like(id, {})
+      .subscribe();
   }
 }

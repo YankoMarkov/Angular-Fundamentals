@@ -23,6 +23,9 @@ export class ErrorInterceptor implements HttpInterceptor {
           case 401:
             this.toastr.error(err.error.message, "Warning")
             break;
+          case 404:
+            this.toastr.error(err.error.message, "Warning")
+            break;
           case 400:
             const message = Object.keys(err.error.errors)
               .map(e => err.error.errors[e])

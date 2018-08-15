@@ -10,13 +10,13 @@ import { DeleteProductComponent } from './delete-product/delete-product.componen
 import { DetailsProductComponent } from './details-product/details-product.component';
 
 const routes: Routes = [
-  { path: "create", component: CreateProductComponent },
+  { path: "create", component: CreateProductComponent, canActivate: [AdminGuard] },
   { path: "all", component: AllProductsComponent },
-  { path: "edit/:id", component: EditProductComponent },
-  {path: "mine", component: MyProductComponent},
-  {path: "delete/:id", component: DeleteProductComponent},
-  {path: "details/:id", component: DetailsProductComponent},
-  
+  { path: "edit/:id", component: EditProductComponent, canActivate: [AdminGuard] },
+  { path: "mine", component: MyProductComponent, canActivate: [AuthGuard] },
+  { path: "delete/:id", component: DeleteProductComponent, canActivate: [AdminGuard] },
+  { path: "deleteProduct/:id", component: DeleteProductComponent, canActivate: [AdminGuard] },
+  { path: "details/:id", component: DetailsProductComponent, canActivate: [AuthGuard] }
 ]
 
 @NgModule({
