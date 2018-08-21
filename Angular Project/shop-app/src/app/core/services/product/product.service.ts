@@ -27,8 +27,12 @@ export class ProductService {
     return this.http.post(createUrl, body);
   }
 
-  getAllProducts() {
-    return this.http.get<ProductModel[]>(allUrl);
+  getAllProducts(page: number, search: string) {
+    let url = `${allUrl}?page=${page}`;
+    if (search) {
+      url += `&search=${search}`;
+    }
+    return this.http.get<ProductModel[]>(url);
   }
 
   getProductDetails(id: number) {

@@ -10,12 +10,14 @@ import { AuthService } from '../../../core/services/auth/auth.service';
   styleUrls: ['./my-product.component.css']
 })
 export class MyProductComponent implements OnInit {
-  productModel: Observable<ProductModel[]>;
+  productModel$: Observable<ProductModel[]>;
 
-  constructor(private productService: ProductService,
-    private authService: AuthService) { }
+  constructor(
+    private productService: ProductService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
-    this.productModel = this.productService.getMyProduct();
+    this.productModel$ = this.productService.getMyProduct();
   }
 }

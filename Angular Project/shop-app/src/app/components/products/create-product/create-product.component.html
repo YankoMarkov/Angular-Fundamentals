@@ -20,8 +20,8 @@
 
         <div class="form-group">
           <label class="form-control-label" for="new-description">Description</label>
-          <input class="form-control" id="new-description" type="text" minlength="10" [(ngModel)]="createModel.description" name="description"
-            #description="ngModel" required>
+          <textarea class="form-control" id="new-description" name="description" rows='5' cols='30' [(ngModel)]="createModel.description"
+            #description="ngModel" required></textarea>
 
           <div [hidden]="description.valid || description.pristine" class="alert alert-dark">
             Description must be more than 10 symbols
@@ -52,7 +52,7 @@
         <div class="form-group">
           <label class="form-control-label" for="category">Select Category</label>
           <select id="category" class="form-control" [(ngModel)]="createModel.category" name="category" #category="ngModel" required>
-            <option *ngFor="let category of categoryModel | async" [value]="category.id">{{category.name}}</option>
+            <option *ngFor="let category of categoryModel$ | async" [value]="category.id">{{category.name}}</option>
           </select>
 
           <div [hidden]="category.valid || category.pristine" class="alert alert-dark">

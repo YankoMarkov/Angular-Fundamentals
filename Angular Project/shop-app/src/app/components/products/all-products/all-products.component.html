@@ -2,11 +2,19 @@
   <div class="row space-top">
     <div class="col-md-12">
       <h1>Products</h1>
-      <p>Select product from the catalog to view details.</p>
     </div>
   </div>
+  <div class="text-center">
+    <form #searchForm="ngForm" (ngSubmit)="search()">
+      <div class="form-group">
+        <input class="form-control" placeholder="Search..." type="text" [(ngModel)]="searchModel" name="searchModel">
+      </div>
+      <button class="btn btn-secondary" type="submit">Search</button>
+    </form>
+  </div>
+  <br>
   <div class="row space-top">
-    <div *ngFor="let product of productModel | async | paginate: {
+    <div *ngFor="let product of productModel$ | async | paginate: {
           id: 'allProducts',
           itemsPerPage: pageSize,
           currentPage: currentPage
@@ -14,13 +22,16 @@
       <div class="card text-white bg-primary">
         <div class="card-body">
           <blockquote class="card-blockquote">
-            <p>{{product.name}}</p>
+            <p>Name: {{product.name}}</p>
             <img src="{{product.image}}" />
-            <p>{{product.description}}</p>
+            <p>Description: {{product.description}}</p>
             <div class="pull-right">
-              <a routerLink="/product/details/{{product.id}}" *ngIf="authService.isAuthenticated()" class="btn btn-info">Details</a>
-              <a routerLink="/category/more/{{product.category}}" *ngIf="authService.isAuthenticated()" class="btn btn-info">More By Category</a>
-              <a routerLink="/product/delete/{{product.id}}" *ngIf="authService.isAdmin()" class="btn btn-danger">Delete</a>
+              <a routerLink="/product/details/{{product.id}}" *ngIf="authService.isAuthenticated()" class="btn btn-outline-info mr-sm-2">Details</a>
+              <a routerLink="/category/more/{{product.category}}" *ngIf="authService.isAuthenticated()" class="btn btn-outline-info">More
+                By Category</a>
+            </div>
+            <div class="pull-right">
+              <a routerLink="/product/delete/{{product.id}}" *ngIf="authService.isAdmin()" class="btn btn-danger mr-sm-2">Delete</a>
               <a routerLink="/product/edit/{{product.id}}" *ngIf="authService.isAdmin()" class="btn btn-success">Edit</a>
             </div>
           </blockquote>

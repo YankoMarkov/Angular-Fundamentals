@@ -4,7 +4,7 @@
       <h1>Product Details</h1>
     </div>
   </div>
-  <div *ngIf="detailsModel | async as product" class="row space-top">
+  <div *ngIf="detailsModel$ | async as product" class="row space-top">
     <div class="col-md-4">
       <div class="card text-white bg-primary">
         <div class="card-body">
@@ -13,9 +13,11 @@
           </blockquote>
           <p>Name: {{product.name}}</p>
           <p>Description: {{product.description}}</p>
-          <p>Price: {{product.price}}</p>
-          <button (click)="like(product.id)" class="btn btn-primary">{{product.likes.length}} Like</button>
-          <button (click)="buyProduct(product)" class="btn btn-primary">Buy</button>
+          <p>Price: {{product.price}} lv.</p>
+          <button (click)="like(product.id)" class="btn btn-outline-info mr-sm-2" *ngIf="authService.isAuthenticated()">{{product.likes.length}}
+            Like
+          </button>
+          <button (click)="buyProduct(product)" class="btn btn-outline-info" *ngIf="authService.isAuthenticated()">Buy</button>
         </div>
       </div>
     </div>
@@ -38,7 +40,7 @@
         <input type="submit" class="btn btn-primary" value="Add" [disabled]="reviewForm.form.invalid">
       </form>
     </div>
-    <div class="col-md-4">
+    <div *ngIf="reviewModel" class="col-md-4">
       <h4>Reviews</h4>
       <div class="card-body">
         <app-product-reviews [productId]="product.id"></app-product-reviews>

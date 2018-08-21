@@ -38,7 +38,7 @@ router.post('/create', authCheck, (req, res) => {
       errors: validationResult.errors
     })
   }
-  
+
   let categories = categoryData.all()
   for (let c of categories) {
     if (c.name == category.name) {
@@ -122,6 +122,21 @@ router.delete('/delete/:id', authCheck, (req, res) => {
     success: true,
     message: 'category deleted successfully!'
   })
+})
+
+router.get('/:id', authCheck, (req, res) => {
+  const id = req.params.id
+
+  const category = categoryData.findById(id)
+
+  if (!category) {
+    return res.status(404).json({
+      success: false,
+      message: 'Category does not exists!'
+    })
+  }
+
+  res.status(200).json(category)
 })
 
 module.exports = router

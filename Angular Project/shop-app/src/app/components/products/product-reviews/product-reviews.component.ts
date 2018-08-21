@@ -10,13 +10,12 @@ import { ProductService } from '../../../core/services/product/product.service';
 })
 export class ProductReviewsComponent implements OnInit {
   @Input() productId: number;
-
-  rewiewModel: Observable<ReviewModel[]>;
+  reviewModel$: Observable<ReviewModel[]>;
 
   constructor(private productService: ProductService) { }
 
   ngOnInit() {
     console.log(this.productId)
-    this.rewiewModel = this.productService.getReviews(this.productId);
+    this.reviewModel$ = this.productService.getReviews(this.productId);
   }
 }

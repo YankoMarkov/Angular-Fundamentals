@@ -8,7 +8,7 @@ import { MoreByCategoryComponent } from './more-by-category/more-by-category.com
 
 const routes: Routes = [
   { path: "create", component: CreateCategoryComponent, canActivate: [AdminGuard] },
-  { path: "all", component: AllCategoryComponent, canActivate: [AuthGuard] },
+  { path: "all", component: AllCategoryComponent, canActivate: [AdminGuard] },
   {path: "more/:id", component: MoreByCategoryComponent, canActivate: [AuthGuard]}
 ]
 

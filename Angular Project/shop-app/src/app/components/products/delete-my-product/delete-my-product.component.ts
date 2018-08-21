@@ -4,6 +4,7 @@ import { ProductModel } from '../../../core/models/product/product.model';
 import { ProductService } from '../../../core/services/product/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../../core/services/auth/auth.service';
 
 @Component({
   selector: 'app-delete-my-product',
@@ -11,18 +12,19 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./delete-my-product.component.css']
 })
 export class DeleteMyProductComponent implements OnInit {
-  deleteModel: Observable<ProductModel>;
+  deleteModel$: Observable<ProductModel>;
   id: number;
 
-  constructor(private productService: ProductService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private toastr: ToastrService) {
+  constructor(
+    private productService: ProductService,
+    private authService: AuthService,
+    private route: ActivatedRoute
+  ) {
     this.id = this.route.snapshot.params['id'];
   }
 
   ngOnInit() {
-    this.deleteModel = this.productService.getProductDetails(this.id);
+    this.deleteModel$ = this.productService.getProductDetails(this.id);
   }
 
   deleteProduct(id: number) {

@@ -8,6 +8,7 @@ import { EditProductComponent } from './edit-product/edit-product.component';
 import { MyProductComponent } from './my-product/my-product.component';
 import { DeleteProductComponent } from './delete-product/delete-product.component';
 import { DetailsProductComponent } from './details-product/details-product.component';
+import { DeleteMyProductComponent } from './delete-my-product/delete-my-product.component';
 
 const routes: Routes = [
   { path: "create", component: CreateProductComponent, canActivate: [AdminGuard] },
@@ -15,7 +16,7 @@ const routes: Routes = [
   { path: "edit/:id", component: EditProductComponent, canActivate: [AdminGuard] },
   { path: "mine", component: MyProductComponent, canActivate: [AuthGuard] },
   { path: "delete/:id", component: DeleteProductComponent, canActivate: [AdminGuard] },
-  { path: "deleteProduct/:id", component: DeleteProductComponent, canActivate: [AdminGuard] },
+  { path: "deleteProduct/:id", component: DeleteMyProductComponent, canActivate: [AuthGuard] },
   { path: "details/:id", component: DetailsProductComponent, canActivate: [AuthGuard] }
 ]
 

@@ -4,6 +4,7 @@ import { ProductModel } from '../../../core/models/product/product.model';
 import { ProductService } from '../../../core/services/product/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { CreateReviewModel } from '../../../core/models/review/create-review.model';
+import { AuthService } from '../../../core/services/auth/auth.service';
 
 @Component({
   selector: 'app-details-product',
@@ -11,18 +12,21 @@ import { CreateReviewModel } from '../../../core/models/review/create-review.mod
   styleUrls: ['./details-product.component.css']
 })
 export class DetailsProductComponent implements OnInit {
-  detailsModel: Observable<ProductModel>;
+  detailsModel$: Observable<ProductModel>;
   reviewModel: CreateReviewModel;
   id: number;
 
-  constructor(private productService: ProductService,
-    private route: ActivatedRoute) {
+  constructor(
+    private productService: ProductService,
+    private authService: AuthService,
+    private route: ActivatedRoute
+  ) {
     this.id = this.route.snapshot.params['id'];
     this.reviewModel = new CreateReviewModel(1, "");
   }
 
   ngOnInit() {
-    this.detailsModel = this.productService.getProductDetails(this.id)
+    this.detailsModel$ = this.productService.getProductDetails(this.id)
   }
 
   buyProduct(data) {

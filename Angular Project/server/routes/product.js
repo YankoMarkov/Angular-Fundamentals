@@ -154,7 +154,7 @@ router.put('/edit/:id', authCheck, (req, res) => {
   if (!product || !req.user.roles.includes('Admin')) {
     return res.status(404).json({
       success: false,
-      message: 'Product does not exists!'
+      message: 'Product does not exists!',
     })
   }
 
@@ -172,7 +172,8 @@ router.put('/edit/:id', authCheck, (req, res) => {
 
   return res.status(200).json({
     success: true,
-    message: 'Product edited successfully!'
+    message: 'Product edited successfully!',
+    product
   })
 })
 
@@ -208,7 +209,8 @@ router.put('/buy/:id', authCheck, (req, res) => {
 
   return res.status(200).json({
     success: true,
-    message: 'Product added successfully to user!'
+    message: 'Product added successfully to user!',
+    product
   })
 })
 
@@ -236,7 +238,8 @@ router.post('/details/:id/like', authCheck, (req, res) => {
 
   res.status(200).json({
     success: true,
-    message: 'Thank you for your like!'
+    message: 'Thank you for your like!',
+    user
   })
 })
 
@@ -306,7 +309,7 @@ router.get('/:id', authCheck, (req, res) => {
   if (!product) {
     return res.status(404).json({
       success: false,
-      message: 'Entry does not exists!'
+      message: 'Product does not exists!'
     })
   }
 

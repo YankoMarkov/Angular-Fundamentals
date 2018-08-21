@@ -11,8 +11,10 @@ import { ActivatedRoute } from '@angular/router';
 export class EditProductComponent implements OnInit {
   editModel: ProductModel
 
-  constructor(private productService: ProductService,
-    private route: ActivatedRoute) { }
+  constructor(
+    private productService: ProductService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
     this.productService.getProduct(this.route.snapshot.params['id'])

@@ -1,24 +1,28 @@
 <div class="container">
   <div class="row space-top">
     <div class="col-md-12">
-      <h1>producturniture Details</h1>
+      <h1>Delete My Product</h1>
     </div>
   </div>
-  <div *ngIf="deleteModel | async as product" class="row space-top">
+  <div *ngIf="deleteModel$ | async as product" class="row space-top">
     <div class="col-md-4">
       <div class="card text-white bg-primary">
         <div class="card-body">
           <blockquote class="card-blockquote">
             <img src="{{product.image}}" />
           </blockquote>
+          <p>Name: {{product.name}}</p>
+          <p>Description: {{product.description}}</p>
+          <p>Price: {{product.price}} lv.</p>
+          <button (click)="deleteProduct(product.id)" class="btn btn-danger" *ngIf="authService.isAuthenticated()">Delete</button>
         </div>
       </div>
     </div>
     <div class="col-md-4">
-      <p>Make: {{product.name}}</p>
-      <p>Description: {{product.description}}</p>
-      <p>Price: {{product.price}}</p>
+      <h4>Reviews</h4>
+      <div class="card-body">
+        <app-product-reviews [productId]="product.id"></app-product-reviews>
+      </div>
     </div>
-    <input (click)="deleteProduct(product.id)" class="btn btn-primary" value="Delete" />
   </div>
 </div>

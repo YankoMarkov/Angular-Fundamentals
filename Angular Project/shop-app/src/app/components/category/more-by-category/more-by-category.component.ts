@@ -13,22 +13,22 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./more-by-category.component.css']
 })
 export class MoreByCategoryComponent implements OnInit {
-  categoryModel: Observable<ProductModel[]>
+  categoryModel$: Observable<ProductModel[]>
   id: number
   pageSize: number = 3;
   currentPage: number = 1;
 
-  constructor(private categoryService: CategoryService,
+  constructor(
+    private categoryService: CategoryService,
     private productService: ProductService,
     private authService: AuthService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private toastr: ToastrService) {
+    private route: ActivatedRoute
+  ) {
     this.id = this.route.snapshot.params['id']
   }
 
   ngOnInit() {
-    this.categoryModel = this.categoryService.productsByCategory(this.id)
+    this.categoryModel$ = this.categoryService.productsByCategory(this.id)
   }
 
   changePage(page) {

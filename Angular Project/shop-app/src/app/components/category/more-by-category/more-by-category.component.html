@@ -2,11 +2,10 @@
   <div class="row space-top">
     <div class="col-md-12">
       <h1>Products</h1>
-      <p>Select product from the catalog to view details.</p>
     </div>
   </div>
   <div class="row space-top">
-    <div *ngFor="let product of categoryModel | async | paginate: {
+    <div *ngFor="let product of categoryModel$ | async | paginate: {
         id: 'allProducts',
         itemsPerPage: pageSize,
         currentPage: currentPage
@@ -18,8 +17,10 @@
             <p>{{product.description}}</p>
             <div class="pull-right">
               <a routerLink="/product/details/{{product.id}}" class="btn btn-info">Details</a>
+            </div>
+            <div class="pull-right">
+              <a routerLink="/product/edit/{{product.id}}" *ngIf="authService.isAdmin()" class="btn btn-success mr-sm-2">Edit</a>
               <a (click)="deleteProduct(product.id)" *ngIf="authService.isAdmin()" class="btn btn-danger">Delete</a>
-              <a routerLink="/product/edit/{{product.id}}" *ngIf="authService.isAdmin()" class="btn btn-success">Edit</a>
             </div>
           </blockquote>
         </div>

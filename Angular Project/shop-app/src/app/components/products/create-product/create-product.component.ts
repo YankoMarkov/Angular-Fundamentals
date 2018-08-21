@@ -14,17 +14,17 @@ import { Observable } from 'rxjs';
 })
 export class CreateProductComponent implements OnInit {
   createModel: CreateProductModel;
-  categoryModel: Observable<CategoryModel[]>;
+  categoryModel$: Observable<CategoryModel[]>;
 
-  constructor(private productSercvice: ProductService,
-    private categoryService: CategoryService,
-    private router: Router,
-    private toastr: ToastrService) {
+  constructor(
+    private productSercvice: ProductService,
+    private categoryService: CategoryService
+  ) {
     this.createModel = new CreateProductModel("", 0, "", "", 0);
   }
 
   ngOnInit() {
-    this.categoryModel = this.categoryService.allCategories()
+    this.categoryModel$ = this.categoryService.allCategories()
   }
 
   create() {
