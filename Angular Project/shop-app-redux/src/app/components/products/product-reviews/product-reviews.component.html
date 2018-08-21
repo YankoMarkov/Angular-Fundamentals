@@ -1,0 +1,10 @@
+<div *ngFor="let review of reviewModels$ | async">
+  <div class="card border-primary mb-3" style="max-width: 20rem;">
+    <div class="card-header">From: {{review.user}}</div>
+    <div class="card-body">
+      <p class="card-title">Date: {{review.createdOn | date :'dd/MMM/yyyy - HH:mm:ss'}}</p>
+      <p class="card-text">Rating: {{review.rating}}</p>
+      <p class="card-text">Comment: {{review.comment}}</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row space-top">
+    <div class="col-md-12">
+      <h1>Create New Category</h1>
+    </div>
+  </div>
+  <form #createForm="ngForm" (ngSubmit)="create()">
+    <div class="row space-top">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label class="form-control-label" for="new-name">Name</label>
+          <input class="form-control" id="new-name" type="text" minlength="3" [(ngModel)]="categoryModel.name" name="name" #name="ngModel"
+            required>
+
+          <div [hidden]="name.valid || name.pristine" class="alert alert-dark">
+            Name must be at least 3 symbols long
+          </div>
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Create" [disabled]="createForm.form.invalid" />
+      </div>
+    </div>
+  </form>
+</div>
