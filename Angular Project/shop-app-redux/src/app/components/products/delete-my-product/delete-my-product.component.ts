@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductModel } from '../../../core/models/product/product.model';
 import { ProductService } from '../../../core/services/product/product.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../core/services/auth/auth.service';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../../../store/app.state';
@@ -21,8 +20,6 @@ export class DeleteMyProductComponent implements OnInit {
     private productService: ProductService,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router,
-    private toastr: ToastrService,
     private store: Store<AppState>
   ) {
     this.id = this.route.snapshot.params['id'];

@@ -8,8 +8,6 @@ import { AuthModule } from './components/authentication/auth.module';
 import { ServicesModule } from './core/services/services.module';
 import { GuardsModule } from './core/guards/guards.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CategoriesModule } from './components/category/categories.module';
-import { ProductsModule } from './components/products/products.module';
 import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
@@ -29,9 +27,7 @@ import { appReducers } from './app.reducers';
     LandingModule,
     AuthModule,
     ServicesModule,
-    GuardsModule,
-    CategoriesModule,
-    ProductsModule
+    GuardsModule
   ],
   providers: [
   ],

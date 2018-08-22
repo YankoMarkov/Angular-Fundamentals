@@ -131,7 +131,7 @@ router.delete('/deleteProduct/:id', authCheck, (req, res) => {
 
   const product = productsData.findById(id);
 
-  if (!product || (product.createdBy !== user && !req.user.roles.includes('Admin'))) {
+  if (!product) {
     return res.status(404).json({
       success: false,
       message: 'Product does not exists!'

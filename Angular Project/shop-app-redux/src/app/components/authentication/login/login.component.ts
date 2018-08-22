@@ -18,8 +18,7 @@ export class LoginComponent implements OnInit {
   }
 
   signIn() {
-    this.authService
-      .login(this.loginModel)
+    this.authService.login(this.loginModel)
       .subscribe();
   }
 }

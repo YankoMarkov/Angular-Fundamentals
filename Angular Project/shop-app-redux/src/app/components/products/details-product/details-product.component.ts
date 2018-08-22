@@ -42,11 +42,22 @@ export class DetailsProductComponent implements OnInit {
 
   addReview() {
     this.productService.createReview(this.id, this.reviewModel)
-      .subscribe();
+      .subscribe(() => {
+        this.productService.getReviews(this.id)
+          .subscribe(() => {
+            this.store.pipe(select(state => state.product.productReviews));
+          });
+      });
+    this.reviewModel = new CreateReviewModel(1, "");
   }
 
   like(id: number) {
     this.productService.like(id, {})
-      .subscribe();
+      .subscribe(() => {
+        this.productService.getProductDetails(this.id)
+          .subscribe(() => {
+            this.detailsModel$ = this.store.pipe(select(state => state.product.productDetails));
+          })
+      });
   }
 }

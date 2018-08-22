@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CreateProductModel } from '../../../core/models/product/create-product.model';
 import { ProductService } from '../../../core/services/product/product.service';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { CategoryModel } from '../../../core/models/category/category.model';
 import { CategoryService } from '../../../core/services/category/category.service';
 import { Observable } from 'rxjs';
@@ -21,8 +19,6 @@ export class CreateProductComponent implements OnInit {
   constructor(
     private productSercvice: ProductService,
     private categoryService: CategoryService,
-    private router: Router,
-    private toastr: ToastrService,
     private store: Store<AppState>
   ) {
     this.createModel = new CreateProductModel("", 0, "", "", 0);

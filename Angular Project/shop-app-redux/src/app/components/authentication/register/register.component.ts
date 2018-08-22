@@ -18,8 +18,7 @@ export class RegisterComponent implements OnInit {
   }
 
   signUp() {
-    this.authService
-      .register(this.registerModel)
+    this.authService.register(this.registerModel)
       .subscribe();
   }
 }
