@@ -13,6 +13,7 @@ import { AppState } from '../../../store/app.state';
 })
 export class MyProductComponent implements OnInit {
   productModel$: Observable<ProductModel[]>;
+  username: string;
 
   constructor(
     private productService: ProductService,
@@ -25,5 +26,9 @@ export class MyProductComponent implements OnInit {
       .subscribe(() => {
         this.productModel$ = this.store.pipe(select(state => state.product.myProducts));
       });
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser) {
+      this.username = JSON.parse(localStorage.getItem('currentUser')).username;
+    }
   }
 }

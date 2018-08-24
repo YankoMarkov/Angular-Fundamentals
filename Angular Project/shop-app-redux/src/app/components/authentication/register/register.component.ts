@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RegisterModel } from '../../../core/models/auth/register.model';
 import { AuthService } from '../../../core/services/auth/auth.service';
 
@@ -7,14 +7,11 @@ import { AuthService } from '../../../core/services/auth/auth.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   registerModel: RegisterModel;
 
   constructor(private authService: AuthService) {
     this.registerModel = new RegisterModel("", "", "");
-  }
-
-  ngOnInit() {
   }
 
   signUp() {

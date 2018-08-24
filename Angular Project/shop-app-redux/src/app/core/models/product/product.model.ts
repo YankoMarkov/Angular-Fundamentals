@@ -4,7 +4,7 @@ export interface ProductModel {
   price: number,
   image: string,
   description: string,
-  buyer: '',
+  buyer: string,
   likes: Array<any>,
   reviews: Array<any>,
   category: number

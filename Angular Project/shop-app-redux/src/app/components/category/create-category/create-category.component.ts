@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CreateCategoryModel } from '../../../core/models/category/create-category.model';
 import { CategoryService } from '../../../core/services/category/category.service';
 
@@ -7,7 +7,7 @@ import { CategoryService } from '../../../core/services/category/category.servic
   templateUrl: './create-category.component.html',
   styleUrls: ['./create-category.component.css']
 })
-export class CreateCategoryComponent implements OnInit {
+export class CreateCategoryComponent {
   categoryModel: CreateCategoryModel;
 
   constructor(private categoryService: CategoryService) {
@@ -17,8 +17,5 @@ export class CreateCategoryComponent implements OnInit {
   create() {
     this.categoryService.createCategory(this.categoryModel)
       .subscribe();
-  }
-
-  ngOnInit() {
   }
 }
