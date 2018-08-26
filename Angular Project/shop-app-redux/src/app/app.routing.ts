@@ -13,8 +13,7 @@ const routes: Routes = [
   { path: 'signin', component: LoginComponent },
   { path: 'signup', component: RegisterComponent },
   { path: 'category', loadChildren: () => CategoriesModule },
-  { path: 'product', loadChildren: () => ProductsModule },
-  { path: '**', component: PageNotFoundComponent }
+  { path: 'product', loadChildren: () => ProductsModule }
 ]
 
 @NgModule({
